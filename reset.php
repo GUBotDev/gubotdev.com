@@ -1,4 +1,7 @@
-<?php
+<?php 
+
+//include header template
+require('layout/header.php');
 
 //if form has been submitted process it
 if(isset($_POST['submit3'])){
@@ -10,9 +13,9 @@ if(isset($_POST['submit3'])){
 		$stmt = $db->prepare('SELECT email FROM members WHERE email = :email');
 		$stmt->execute(array(':email' => $_POST['email3']));
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-		if(empty($row['email3'])){
-			$error[] = 'Email provided is not on recognised.';
+		
+		if(empty($row['email'])){
+			$error[] = 'Email provided is not recognised.';
 		}
 
 	}
@@ -20,19 +23,19 @@ if(isset($_POST['submit3'])){
 	//if no errors have been created carry on
 	if(!isset($error)){
 
-		//create the activasion code
+		//create the activation code
 		$token = md5(uniqid(rand(),true));
 
 		try {
 
 			$stmt = $db->prepare("UPDATE members SET resetToken = :token, resetComplete='No' WHERE email = :email");
 			$stmt->execute(array(
-				':email' => $row['email3'],
+				':email' => $row['email'],
 				':token' => $token
 			));
 
 			//send email
-			$to = $row['email3'];
+			$to = $row['email'];
 			$subject = "Password Reset";
 			$body = "<p>Someone requested that the password be reset.</p>
 			<p>If this was a mistake, just ignore this email and nothing will happen.</p>
@@ -46,7 +49,7 @@ if(isset($_POST['submit3'])){
 			$mail->send();
 
 			//redirect to index page
-			header('Location: login.php?action=reset');
+			header('Location: reset.php?action=reset');
 			exit;
 
 		//else catch the exception and show the error.
@@ -58,8 +61,6 @@ if(isset($_POST['submit3'])){
 
 }
 
-//include header template
-require('layout/header.php');
 ?>
 
 <!-- Banner -->
@@ -91,12 +92,13 @@ require('layout/header.php');
 							echo "<h2>Please check your inbox for a reset link.</h2>";
 							break;
 					}
+
 				}
 				?>
 
 				<input type="email" name="email3" id="email" placeholder="Email" value="" tabindex="1">
 				<p></p>
-				<input type="submit" name="submit" value="Send Reset Link" tabindex="2">
+				<input type="submit" name="submit3" value="Send Reset Link" tabindex="2">
 			</form>
 	</div>
 </div>

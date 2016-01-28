@@ -9,7 +9,7 @@ define('DBUSER','root');
 define('DBPASS','123456');
 define('DBNAME','GUBotDev');
 
-define('DIR','http://domain.com/');
+define('DIR','http://localhost/');
 define('SITEEMAIL','noreply@domain.com');
 
 try {
@@ -17,7 +17,7 @@ try {
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 } catch(PDOException $e) {
-    echo '<p class="bg-danger">'.$e->getMessage().'</p>';
+    echo '<p>'.$e->getMessage().'</p>';
     exit;
 }
 

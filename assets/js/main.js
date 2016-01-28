@@ -553,6 +553,106 @@
 						$menu._hide();
 
 				});
+
+			// cart.
+			var $cart = $('#cart');
+
+			$cart._locked = false;
+
+			$cart._lock = function() {
+
+				if ($cart._locked)
+					return false;
+
+				$cart._locked = true;
+
+				window.setTimeout(function() {
+					$cart._locked = false;
+				}, 350);
+
+				return true;
+
+			};
+
+			$cart._show = function() {
+
+				if ($cart._lock())
+					$body.addClass('is-cart-visible');
+
+			};
+
+			$cart._hide = function() {
+
+				if ($cart._lock())
+					$body.removeClass('is-cart-visible');
+
+			};
+
+			$cart._toggle = function() {
+
+				if ($cart._lock())
+					$body.toggleClass('is-cart-visible');
+
+			};
+
+			$cart
+			.appendTo($body)
+			.on('click', function(event) {
+
+				event.stopPropagation();
+
+					// Hide.
+					$cart._hide();
+
+				})
+			.find('.inner')
+			.on('click', '.close', function(event) {
+
+				event.preventDefault();
+				event.stopPropagation();
+				event.stopImmediatePropagation();
+
+						// Hide.
+						$cart._hide();
+
+					})
+			.on('click', function(event) {
+				event.stopPropagation();
+			})
+			.on('click', 'a', function(event) {
+
+				var href = $(this).attr('href');
+
+				event.preventDefault();
+				event.stopPropagation();
+
+						// Hide.
+						$cart._hide();
+
+						// Redirect.
+						window.setTimeout(function() {
+							window.location.href = href;
+						}, 350);
+
+					});
+
+			$body
+			.on('click', 'a[href="#cart"]', function(event) {
+
+				event.stopPropagation();
+				event.preventDefault();
+
+					// Toggle.
+					$cart._toggle();
+
+				})
+			.on('keydown', function(event) {
+
+					// Hide on escape.
+					if (event.keyCode == 27)
+						$cart._hide();
+
+				});
 		});
 
 })(jQuery);
