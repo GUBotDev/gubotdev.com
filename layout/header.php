@@ -69,6 +69,17 @@ if(isset($_POST['submit2'])){
 
 }
 
+if(isset($_POST['submit13'])){
+	//array_push($_SESSION['cart'], $_POST['item']);
+	$temp[] = array('id' => (int)$_POST['item'], 'quantity' => (int)$_POST['quantity']);//$_POST['item'];
+	array_push($_SESSION['cart'], $temp);
+	//header('Location: ' . $_SERVER['HTTP_REFERER']);
+	//header('Location: '.basename($_SERVER['PHP_SELF']));
+	//print_r($_SESSION['cart']);
+	//unset($_SESSION['cart']);
+	var_dump($_SESSION['cart']);
+}
+
 
 if(isset($_POST['submit1'])){
 
@@ -77,6 +88,7 @@ if(isset($_POST['submit1'])){
 	
 	if($user->login($username,$password)){ 
 		$_SESSION['username1'] = $username;
+		$_SESSION['cart'] = array();
 		header('Location: '.basename($_SERVER['PHP_SELF']));
 		exit;
 
@@ -106,7 +118,7 @@ $pageTitle = 'GUBotDev';
 			<h1><a href="index.php" class="logoImg"><img src="images/logo2.png"></a></h1>
 			<nav>
 				<a href="index.php" class="button">Home</a>
-				<a href="store.php" class="button">Store</a>
+				<a href="projects.php" class="button">Projects</a>
 				<a href="videos.php" class="button">Videos</a>
 				<a href="#contact" class="button">Contact</a>
 				<a href="#menu" class="button"><i class="fa fa-bars"></i> Menu</a>
@@ -237,10 +249,53 @@ $pageTitle = 'GUBotDev';
 <nav id="cart">
 	<div class="inner" style="width: 40em">
 		<?php
+			echo '<h3 class="major">Items</h3>
+			<div class="table-wrapper">
+				<table class="default">
+					<tbody>
+						<tr>
+							<td>Item</td>
+							<td>$'.'100.00'.'</td>
+							<td><a href="#" class="button">Remove</a></td>
+						</tr>
+						<tr>
+							<td>Item</td>
+							<td>$'.'100.00'.'</td>
+							<td><a href="#" class="button">Remove</a></td>
+						</tr>
+						<tr>
+							<td>Total Price:</td>
+							<td>$'.'200.00'.'</td>
+							<td><a href="#" class="button">Remove All</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			';
 
-
-
+			var_dump($_SESSION['cart']);
 		?>
+
+		<form id="myContainer" method="post" action="/checkout" style=".button{width: 80%; padding: 4em, 0, 4em, 0}" class="button fit"></form>
+
+	    <script>
+	      window.paypalCheckoutReady = function () {
+	        paypal.checkout.setup('<Your-Merchant-ID>', {
+	            environment: 'sandbox',
+	            container: 'myContainer'
+	          });
+	      };
+	    </script>
+
+	    <script src="//www.paypalobjects.com/api/checkout.js" async></script>
+
+		<form role="form" method="post" action="" autocomplete="off">
+			<h3 class="major">Buy Now</h3>
+			<input type="submit" name="submit2" value="Pay With PayPal" class="button fit" tabindex="5" style="margin-bottom: 1em">
+		</form>
+		<form role="form" method="post" action="" autocomplete="off">
+			<input type="submit" name="submit2" value="Pay With CoinBase" class="button fit" tabindex="5" style="margin-bottom: 1em">
+		</form>
 		<p></p>
 		<a href="#" class="close">Close</a>
 	</div>
@@ -250,15 +305,15 @@ $pageTitle = 'GUBotDev';
 <nav id="menu">
 	<div class="inner"  style="width: 24.75em">
 		<div id="mainMenu" style="display: block">
-			<a href="index.php" class="button" style="width: 40%">Home</a>
-			<a href="store.php" class="button" style="width: 40%">Store</a>
+			<a href="index.php" class="button" style="width: 40%; margin-bottom: 1em">Home</a>
+			<a href="projects.php" class="button" style="width: 40%; margin-bottom: 1em">Projects</a>
 			<a href="videos.php" class="button" style="width: 40%; margin-bottom: 1em">Videos</a>
-			<a href="javascript:toggleVisibility('contactHide')" class="button" style="width: 40%">Contact</a>
+			<a href="javascript:toggleVisibility('contactHide')" class="button" style="width: 40%; margin-bottom: 1em">Contact</a>
 			<?php
 
 			if( $user->is_logged_in() ){
-				echo "<a href='#cart' class='button' style='margin: 0 1em 0 0'>Cart</a>";
-				echo "<a href='userPage.php' class='button' style='width: 40%; margin-bottom: 1em'>".$_SESSION['username']."</a>";
+				echo "<a href='#cart' class='button' style='width: 40%; margin-bottom: 1em; margin-right: 1em'>Cart</a>";
+				echo "<a href='userPage.php' class='button' style='width: 40%; margin-bottom: 1em;'>".$_SESSION['username']."</a>";
 				echo "<a href='logout.php' class='button' style='width: 83%; margin-bottom: 1em'>Log Out</a>";
 			}
 			else{

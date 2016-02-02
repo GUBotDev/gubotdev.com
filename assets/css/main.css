@@ -39,6 +39,14 @@
 		border-spacing: 0;
 	}
 
+	.paypal-button-hidden {
+      visibility: hidden;
+    }
+
+	.paypal-button {
+		
+    }
+
 	/* khalid */
 /*
 	#khalid {

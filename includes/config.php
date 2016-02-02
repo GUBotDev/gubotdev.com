@@ -24,4 +24,6 @@ try {
 include('classes/user.php');
 include('classes/phpmailer/mail.php');
 $user = new User($db);
+$_SESSION['cart'] = array();
+
 ?>

@@ -70,6 +70,10 @@ require('layout/header.php');
 												</tbody>
 											</table>
 										</div>
+										<form method="post" action="editReceipt.php" autocomplete="off">
+											<input type="hidden" name="id" id="id" value="'.$row['id'].'" />
+											<input type="submit" name="submit11" value="Complete Order" tabindex="9" style="color: red">
+										</form>
 									</article>
 								';
 							}
@@ -80,6 +84,13 @@ require('layout/header.php');
 						echo '</section>';
 					}
 
+					//VIEW ALL PROCESSED ITEMS
+					echo'
+					<h1 class="major">View All Processed Orders</h1>
+					<form method="post" action="allItems.php" autocomplete="off">
+						<input type="submit" name="submit12" value="View All Processed Orders">
+					</form>
+					';
 
 					//ADD ADMINS
 					echo '
@@ -115,7 +126,9 @@ require('layout/header.php');
 									<p></p>
 									<input type="text" name="timeRequired" id="timeRequired" placeholder="Time Required (Days)" tabindex="6">
 									<p></p>
-									<input type="submit" name="submit7" value="Add Product" tabindex="7">
+									<input type="text" name="polyMapCode" id="polyMapCode" placeholder="Polygon Mapping Code" tabindex="7">
+									<p></p>
+									<input type="submit" name="submit7" value="Add Product" tabindex="8">
 								</form>
 
 							</article>
@@ -155,7 +168,14 @@ require('layout/header.php');
 									<p></p>
 									<input type="text" name="timeRequired" id="timeRequired" placeholder="'.$row['timeRequired'].'" value="'.$row['timeRequired'].'" tabindex="6">
 									<p></p>
-									<input type="submit" name="submit6" value="Confirm Changes" tabindex="7">
+									<input type="text" name="polyMapCode" id="polyMapCode" placeholder="'.htmlspecialchars($row['polyMapCode']).'" value="'.htmlspecialchars($row['polyMapCode']).'" tabindex="7">
+									<p></p>
+									<input type="submit" name="submit6" value="Confirm Changes" tabindex="8">
+								</form>
+
+								<form method="post" action="removeItem.php" autocomplete="off">
+									<input type="hidden" name="id" id="id" value="'.$row['id'].'" />
+									<input type="submit" name="submit9" value="Remove Item" tabindex="9" style="color: red">
 								</form>
 
 							</article>
@@ -168,10 +188,45 @@ require('layout/header.php');
 						echo '</section>';
 					}
 
+					/*
+					//EDIT RECEIPT
+					echo '<h1 class="major">Edit Products</h1>';
+
+					$stmt3 = $db->prepare('SELECT * FROM products');
+					$stmt3->execute();
+					$row3 = $stmt3->fetchAll(PDO::FETCH_ASSOC);
+
+					$receiptDis = false;
+
+					foreach ($row3 as $row) {
+						if ($receiptDis == false) {
+							echo '<section class="features">';
+							$receiptDis = true;
+						}
+
+						echo '
+							<article>
+								<h3 class="major">ID Number: '.$row['id'].'</h3>
+
+								<form method="post" action="removeReceipt.php" autocomplete="off">
+									<input type="hidden" name="id" id="id" value="'.$row['id'].'" />
+									<input type="submit" name="submit9" value="Remove Item" tabindex="9" style="color: red">
+								</form>
+
+							</article>
+						';
+
+
+					}
+
+					if ($receiptDis == true){
+						echo '</section>';
+					}
+					*/
 
 
 				}//end ROOT USER PAGE
-				else {
+				else if ($user->is_logged_in()) {
 					$stmt3 = $db->prepare('SELECT * FROM receipts WHERE username = :username');
 					$stmt3->execute(array(':username' => $_SESSION['username']));
 					$row = $stmt3->fetchAll(PDO::FETCH_ASSOC);
@@ -278,6 +333,9 @@ require('layout/header.php');
 							<a href="store.php" class="button special">Go To Store</a>
 							';
 					}
+				}
+				else{
+					header('Location: index.php');
 				}
 			?>
 	</div>

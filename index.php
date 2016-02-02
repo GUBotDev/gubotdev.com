@@ -20,7 +20,7 @@ require('layout/header.php');
 					<div class="content">
 						<h2 class="major">We do things</h2>
 						<p>lots of things</p>
-						<a href="projects.php" class="special">projects</a>
+						<a href="projects.php" class="special">Projects</a>
 					</div>
 				</div>
 			</section>
@@ -53,16 +53,54 @@ require('layout/header.php');
 			<section id="four" class="wrapper alt style1">
 				<div class="inner">
 					<section class="features">
-						<article>
-							<a href="khalidV2.php" class="image"><img src="images/gu1.jpg" alt="" /></a>
-							<h3 class="major">Khalid V2</h3>
-							<p>flying thing with many blades</p>
-						</article>
-						<article>
-							<a href="#" class="image"><img src="images/gu2.jpg" alt="" /></a>
-							<h3 class="major">same thing without link</h3>
-							<p>stuff</p>
-						</article>
+						<?php
+
+						$stmt3 = $db->prepare('SELECT * FROM products');
+						$stmt3->execute();
+						$row3 = $stmt3->fetchAll(PDO::FETCH_ASSOC);
+
+						$amount = count($row3);
+
+						$randomInt = rand (1, $amount);
+						$randomInt2 = rand (1, $amount);
+
+						$numArray = array();
+
+						foreach ($row3 as $row){
+							array_push($numArray, (int)$row['id']);
+
+						}
+
+						if (count($numArray) >= 2) {
+							do {
+								$randomInt = rand (1, $amount);
+							} while (!in_array($randomInt, $numArray));
+
+							do {
+								$randomInt2 = rand (1, $amount);
+							} while ($randomInt == $randomInt2 || !in_array($randomInt2, $numArray));
+
+
+							echo '
+							<article>
+								<form name="form'.$row3[$randomInt]['id'].'" method="post" action="item.php" autocomplete="off">
+									<input type="hidden" name="id" id="id" value="'.$row3[$randomInt]['id'].'" />
+									<a href="JAVASCRIPT:form'.$row3[$randomInt]['id'].'.submit()" class="image"><img src="images/uploads/'.$row3[$randomInt]['pictureName'].'" alt="" /></a>
+								</form>
+								<h3 class="major">'.$row3[$randomInt]['name'].'</h3>
+								<p>'.$row3[$randomInt]['shortDesc'].'</p>
+							</article>
+
+							<article>
+								<form name="form'.$row3[$randomInt2]['id'].'" method="post" action="item.php" autocomplete="off">
+									<input type="hidden" name="id" id="id" value="'.$row3[$randomInt2]['id'].'" />
+									<a href="JAVASCRIPT:form'.$row[$randomInt2]['id'].'.submit()" class="image"><img src="images/uploads/'.$row3[$randomInt2]['pictureName'].'" alt="" /></a>
+								</form>
+								<h3 class="major">'.$row3[$randomInt2]['name'].'</h3>
+								<p>'.$row3[$randomInt2]['shortDesc'].'</p>
+							</article>';
+						}
+						?>
 					</section>
 				</div>
 			</section>

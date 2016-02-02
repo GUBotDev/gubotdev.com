@@ -21,22 +21,16 @@ if ($userData['isAdmin'] == 1) {
 	
 	//id, name, description, shortDesc, price, pictureName, timeRequired
 
-	if(isset($_POST['submit7'])){
-		$stmt3 = $db->prepare('INSERT INTO products SET name = :name, description = :description, shortDesc = :shortDesc, price = :price, pictureName = :pictureName, timeRequired = :timeRequired, polyMapCode = :polyMapCode');
-		$stmt3->execute(array(
-			':name' => $_POST['name'],
-			':description' => $_POST['description'],
-			':shortDesc' => $_POST['shortDesc'],
-			':price' => $_POST['price'],
-			':pictureName' => $_POST['pictureName'],
-			':timeRequired' => $_POST['timeRequired'],
-			':polyMapCode' => $_POST['polyMapCode']
+	if(isset($_POST['submit9'])){
+		$stmt2 = $db->prepare('DELETE FROM products WHERE id = :id');
+		$stmt2->execute(array(
+			':id' => $_POST['id']
 		));
 
-		echo $_POST['name'].' has been added.';
+		echo 'Item number: '.$_POST['id'].' has been removed.';
 	}
 	else {
-		echo 'Information invalid.';
+		echo 'Product does not exist.';
 	}
 	
 	

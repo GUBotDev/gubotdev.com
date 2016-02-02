@@ -21,19 +21,24 @@ if ($userData['isAdmin'] == 1) {
 	
 	//id, name, description, shortDesc, price, pictureName, timeRequired
 
-	if(isset($_POST['submit7'])){
-		$stmt3 = $db->prepare('INSERT INTO products SET name = :name, description = :description, shortDesc = :shortDesc, price = :price, pictureName = :pictureName, timeRequired = :timeRequired, polyMapCode = :polyMapCode');
-		$stmt3->execute(array(
-			':name' => $_POST['name'],
-			':description' => $_POST['description'],
-			':shortDesc' => $_POST['shortDesc'],
-			':price' => $_POST['price'],
-			':pictureName' => $_POST['pictureName'],
-			':timeRequired' => $_POST['timeRequired'],
-			':polyMapCode' => $_POST['polyMapCode']
-		));
+	if(isset($_POST['submit11'])){
+		$stmt2 = $db->prepare('SELECT * FROM receipts WHERE id = :id');
+		$stmt2->execute(array(':id' => $_POST['id']));
+		$row4 = $stmt2->fetch(PDO::FETCH_ASSOC);
 
-		echo $_POST['name'].' has been added.';
+		
+		if(empty($row4['id'])){
+			echo 'Product provided is not recognised.';
+		}
+		else {
+			$stmt3 = $db->prepare('UPDATE receipts SET isCompleted = :isCompleted WHERE id = :id');
+			$stmt3->execute(array(
+				':id' => $_POST['id'],
+				':isCompleted' => 1
+			));
+
+			echo 'Order number: '.$_POST['id'].' for user: '.$row4['username'].' has been set to complete.';
+		}
 	}
 	else {
 		echo 'Information invalid.';

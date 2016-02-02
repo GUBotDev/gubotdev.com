@@ -11,7 +11,7 @@ require('layout/header.php');
 	<div class="inner">
 		<?php
 
-		if(isset($_POST['submit7'])){
+		if(isset($_POST['id'])){
 			$stmt2 = $db->prepare('SELECT * FROM products WHERE id = :id');
 			$stmt2->execute(array(':id' => $_POST['id']));
 			$row4 = $stmt2->fetch(PDO::FETCH_ASSOC);
@@ -50,7 +50,7 @@ require('layout/header.php');
 					<p style="font-size: 10pt"><span class="image right"><img src="images/uploads/'.$row4['pictureName'].'" alt="" /></span>'.$row4['description'].'</p>
 					
 					<h2 style="text-transform: capitalize; border-bottom: solid 2px rgba(242, 175, 50, 0.5);">Don\'t want to build it?</h2>
-					<a href="javascript:void(0)" class="button special disabled" disabled>Buy the '.$row4['name'].'</a> - Out of Stock
+					<a href="javascript:void(0)" class="button special disabled" disabled>Add the '.$row4['name'].' to the Cart</a> - Out of Stock
 					<p></p>
 				</section>
 			';

@@ -31,7 +31,7 @@ if ($userData['isAdmin'] == 1) {
 			echo 'Product provided is not recognised.';
 		}
 		else {
-			$stmt3 = $db->prepare('UPDATE products SET name = :name, description = :description, shortDesc = :shortDesc, price = :price, pictureName = :pictureName, timeRequired = :timeRequired WHERE id = :id');
+			$stmt3 = $db->prepare('UPDATE products SET name = :name, description = :description, shortDesc = :shortDesc, price = :price, pictureName = :pictureName, timeRequired = :timeRequired, polyMapCode = :polyMapCode WHERE id = :id');
 			$stmt3->execute(array(
 				':id' => $_POST['id'],
 				':name' => $_POST['name'],
@@ -39,7 +39,8 @@ if ($userData['isAdmin'] == 1) {
 				':shortDesc' => $_POST['shortDesc'],
 				':price' => $_POST['price'],
 				':pictureName' => $_POST['pictureName'],
-				':timeRequired' => $_POST['timeRequired']
+				':timeRequired' => $_POST['timeRequired'],
+				':polyMapCode' => $_POST['polyMapCode']
 			));
 
 			echo 'Product Number: '.$_POST['id'].' has been updated.';
