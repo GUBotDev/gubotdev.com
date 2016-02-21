@@ -273,59 +273,21 @@ $pageTitle = 'GUBotDev';
 			</div>
 			';
 
-			//	var_dump($_SESSION['cart']);
+			var_dump($_SESSION['cart']);
 		?>
 
-		<!--<form id="myContainer" method="post" action="/checkout" style=".button{width: 80%; padding: 4em, 0, 4em, 0}" class="button fit"></form>
+		<form id="myContainer" method="post" action="/checkout" style=".button{width: 80%; padding: 4em, 0, 4em, 0}" class="button fit"></form>
 
-	    <form action="" method="POST">-->
-            
-            <form action="" method="POST">
-                <script
-                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                    data-key="pk_test_UTLHIu78EJyfJkOfEqr9gVPz"
-                    data-amount="2000"
-                    data-name="Demo Site"
-                    data-description="2 widgets ($90.00)"
-                    data-image="/128x128.png"
-                    data-locale="auto">
-                </script>
-            </form>
-            
-            <!-- Custom Stripe checkout -->
-            <!--<script src="https://checkout.stripe.com/checkout.js"></script>
+	    <script>
+	      window.paypalCheckoutReady = function () {
+	        paypal.checkout.setup('<Your-Merchant-ID>', {
+	            environment: 'sandbox',
+	            container: 'myContainer'
+	          });
+	      };
+	    </script>
 
-            <button id="customButton">Purchase</button>
-
-            <script>
-                var handler = StripeCheckout.configure({
-                    key: 'pk_test_UTLHIu78EJyfJkOfEqr9gVPz',
-                    image: '/img/documentation/checkout/marketplace.png',
-                    locale: 'auto',
-                    token: function(token) {
-                    // Use the token to create the charge with a server-side script.
-                    // You can access the token ID with `token.id`
-                    }
-                });
-
-                $('#customButton').on('click', function(e) {
-                    // Open Checkout with further options
-                    handler.open({
-                        name: 'Demo Site',
-                        description: '2 widgets',
-                        amount: 2000
-                    });
-                    e.preventDefault();
-                });
-
-                // Close Checkout on page navigation
-                $(window).on('popstate', function() {
-                    handler.close();
-                });
-            </script>
-            -->
-            
-	    <!--<script src="//www.paypalobjects.com/api/checkout.js" async></script>
+	    <script src="//www.paypalobjects.com/api/checkout.js" async></script>
 
 		<form role="form" method="post" action="" autocomplete="off">
 			<h3 class="major">Buy Now</h3>
@@ -338,7 +300,7 @@ $pageTitle = 'GUBotDev';
 		<a href="#" class="close">Close</a>
 	</div>
 </nav>
--->
+
 <!-- menu -->
 <nav id="menu">
 	<div class="inner"  style="width: 24.75em">

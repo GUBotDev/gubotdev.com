@@ -3,7 +3,7 @@
 <section id="footer">
 	<div class="inner">
 		<ul class="copyright">
-			<li>&copy; 2015 - <?php echo date("Y"); ?> GUBotDev All rights reserved.</li>
+			<li>&copy; 2015 GUBotDev All rights reserved.</li>
 			<li><a href="https://github.com/GUBotDev" class="icon fa-github"><span class="label">Github</span></a></li>
 			<li><a href="https://www.facebook.com/GUBotDevelopment" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
 			<li><a href="https://twitter.com/gubotdev" class="icon fa-twitter"><span class="label">Twitter</span></a></li>

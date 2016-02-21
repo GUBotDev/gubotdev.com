@@ -2,11 +2,11 @@
 ob_start();
 session_start();
 
-date_default_timezone_set('America/New_York');
+date_default_timezone_set('	America/New_York');
 
 define('DBHOST','localhost');
 define('DBUSER','root');
-define('DBPASS','');
+define('DBPASS','123456');
 define('DBNAME','GUBotDev');
 
 define('DIR','http://localhost/');
