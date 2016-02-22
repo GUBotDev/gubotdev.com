@@ -15,8 +15,32 @@
 Route::get('/', 'HomeController@getIndex');
 
 // Projects Routes
-Route::get('projects', 'ProjectsController@getProjectsIndex');
-Route::get('projects/{slug}', 'ProjectController@getProject');
+Route::group(['prefix' => 'projects'], function() {
+	Route::get('/', 'ProjectsController@getProjectsIndex');
+	Route::get('{slug}', 'ProjectController@getProject');
+});
+
+// Pages Route
+Route::group(['prefix' => 'page'], function() {
+	Route::group(['prefix' => 'videos'], function() {
+		Route::get('/', 'PagesController@getVideosIndex');
+		Route::get('{slug}', 'PagesController@getVideo');
+	});
+	
+	Route::get('contact', 'PagesController@getContactPage');
+	Route::post('contact', 'PagesController@postContactPage');
+});
+
+Route::group(['prefix' => 'account'], function() {
+	Route::get('/', 'AccountController@getAccountIndex');
+
+	Route::get('settings', 'AccountController@getAccountSettings');
+	Route::post('settings', 'AccountController@postAccountSettings');
+
+	Route::get('orders', 'AccountController@getOrders');
+
+	// there are more... I cant think of them at the moment
+});
 
 // Admin Routes
 Route::group(['prefix' => 'admin'], function() {
@@ -25,6 +49,12 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::get('projects', 'AdminController@getProjectsIndex');
 	Route::get('projects/{slug}', 'AdminController@getProject');
 	Route::post('projects/{slug}', 'AdminController@postProject');
+
+	Route::get('videos', 'AdminController@getVideosIndex');
+	Route::get('videos/{slug}', 'AdminController@getVideo');
+	Route::post('videos/{slug}', 'AdminController@postVideo');
+
+	// there are more... I cant think of them at the moment
 });
 
 /*
