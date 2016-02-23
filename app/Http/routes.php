@@ -16,8 +16,8 @@ Route::get('/', 'HomeController@getIndex');
 
 // Projects Routes
 Route::group(['prefix' => 'projects'], function() {
-	Route::get('/', 'ProjectsController@getProjectsIndex');
-	Route::get('{slug}', 'ProjectController@getProject');
+	Route::get('/', 'PagesController@getProjectsIndex');
+	Route::get('{slug}', 'PagesController@getProject');
 });
 
 // Pages Route
@@ -37,7 +37,9 @@ Route::group(['prefix' => 'account'], function() {
 	Route::get('settings', 'AccountController@getAccountSettings');
 	Route::post('settings', 'AccountController@postAccountSettings');
 
-	Route::get('orders', 'AccountController@getOrders');
+	Route::get('orders', 'AccountController@getOrdersIndex');
+	Route::get('orders/{slug}', 'AccountController@getOrder');
+	Route::get('orders/{slug}', 'AccountController@postOrder');
 
 	// there are more... I cant think of them at the moment
 });
@@ -49,6 +51,10 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::get('projects', 'AdminController@getProjectsIndex');
 	Route::get('projects/{slug}', 'AdminController@getProject');
 	Route::post('projects/{slug}', 'AdminController@postProject');
+
+	Route::get('orders', 'AccountController@getOrdersIndex');
+	Route::get('orders/{slug}', 'AccountController@getOrder');
+	Route::get('orders/{slug}', 'AccountController@postOrder');
 
 	Route::get('videos', 'AdminController@getVideosIndex');
 	Route::get('videos/{slug}', 'AdminController@getVideo');
