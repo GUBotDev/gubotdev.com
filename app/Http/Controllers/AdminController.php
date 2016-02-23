@@ -15,11 +15,11 @@ class AdminController extends Controller {
     }
 
     public function getProjectsIndex() {
-        return view('admin.index');
+        return view('admin.projectsIndex');
     }
 
     public function getProject($slug) {
-
+    	return view('admin.projectsIndividual');
     }
 
     public function postProject($slug) {
@@ -27,11 +27,11 @@ class AdminController extends Controller {
     }
 
     public function getOrdersIndex() {
-
+    	return view('admin.ordersIndex');
     }
 
     public function getOrder($slug) {
-
+		return view('admin.ordersIndividual');
     }
 
     public function postOrder($slug) {
@@ -39,11 +39,11 @@ class AdminController extends Controller {
     }
 
     public function getVideosIndex() {
-
+    	return view('admin.videosIndex');
     }
 
     public function getVideo($slug) {
-
+    	return view('admin.videosIndividual');
     }
 
     public function postVideo($slug) {

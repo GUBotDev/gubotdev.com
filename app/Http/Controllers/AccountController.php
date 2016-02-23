@@ -11,11 +11,11 @@ class AccountController extends Controller {
 	}
 
     public function getAccountIndex() {
-
+        return view('account.index');
     }
 
     public function getAccountSettings() {
-    	
+    	return view('account.settings');
     }
 
     public function postAccountSettings() {
@@ -23,15 +23,11 @@ class AccountController extends Controller {
     }
 
     public function getOrdersIndex() {
-    	
-    }
-
-    public function getOrdersIndex() {
-    	
+    	return view('account.ordersIndex');
     }
 
     public function getOrder($slug) {
-    	
+    	return view('account.ordersIndividual');
     }
 
     public function getOrder($slug) {
