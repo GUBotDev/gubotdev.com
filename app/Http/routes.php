@@ -14,17 +14,20 @@
 // Home Route
 Route::get('/', 'HomeController@getIndex');
 
-// Projects Routes
-Route::group(['prefix' => 'projects'], function() {
 
-	Route::get('/', 'PagesController@getProjectsIndex');
-	Route::get('{slug}', 'PagesController@getProject');
 
-});
-
-// Pages Route
+// Page Routes
 Route::group(['prefix' => 'page'], function() {
 
+	// Project Routes
+	Route::group(['prefix' => 'projects'], function() {
+
+		Route::get('/', 'PagesController@getProjectsIndex');
+		Route::get('{slug}', 'PagesController@getProject');
+
+	});
+
+	// Videos Routes
 	Route::group(['prefix' => 'videos'], function() {
 		Route::get('/', 'PagesController@getVideosIndex');
 		Route::get('{slug}', 'PagesController@getVideo');
@@ -35,6 +38,7 @@ Route::group(['prefix' => 'page'], function() {
 
 });
 
+// Account Routes
 Route::group(['prefix' => 'account'], function() {
 
 	Route::get('/', 'AccountController@getAccountIndex');
@@ -49,7 +53,7 @@ Route::group(['prefix' => 'account'], function() {
 });
 
 // Admin Routes
-Route::group(['prefix' => 'admin'], function() {\
+Route::group(['prefix' => 'admin'], function() {
 
 	Route::get('/', 'AdminController@getAdminIndex');
 
@@ -64,7 +68,7 @@ Route::group(['prefix' => 'admin'], function() {\
 	Route::get('videos', 'AdminController@getVideosIndex');
 	Route::get('videos/{slug}', 'AdminController@getVideo');
 	Route::post('videos/{slug}', 'AdminController@postVideo');
-	
+
 });
 
 /*
