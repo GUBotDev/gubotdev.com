@@ -12,7 +12,7 @@
 */
 
 // Home Route
-Route::get('/', 'HomeController@getIndex');
+Route::get('/', ['uses' => 'HomeController@getIndex', 'as' => 'home']);
 
 
 
@@ -39,7 +39,7 @@ Route::group(['prefix' => 'page'], function() {
 });
 
 // Account Routes
-Route::group(['prefix' => 'account'], function() {
+Route::group(['prefix' => 'account', 'middleware' => 'auth'], function() {
 
 	Route::get('/', 'AccountController@getAccountIndex');
 
@@ -53,7 +53,7 @@ Route::group(['prefix' => 'account'], function() {
 });
 
 // Admin Routes
-Route::group(['prefix' => 'admin'], function() {
+Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin']], function() {
 
 	Route::get('/', 'AdminController@getAdminIndex');
 
@@ -84,4 +84,10 @@ Route::group(['prefix' => 'admin'], function() {
 
 Route::group(['middleware' => ['web']], function () {
     //
+});
+
+Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+
+    Route::get('/home', 'HomeController@index');
 });
