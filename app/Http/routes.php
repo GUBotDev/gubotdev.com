@@ -22,14 +22,14 @@ Route::group(['prefix' => 'page'], function() {
 	// Project Routes
 	Route::group(['prefix' => 'projects'], function() {
 
-		Route::get('/', 'PagesController@getProjectsIndex');
+		Route::get('/', ['uses' => 'PagesController@getProjectsIndex', 'as' => 'projectsIndex']);
 		Route::get('{slug}', 'PagesController@getProject');
 
 	});
 
 	// Videos Routes
 	Route::group(['prefix' => 'videos'], function() {
-		Route::get('/', 'PagesController@getVideosIndex');
+		Route::get('/', ['uses' => 'PagesController@getVideosIndex', 'as' => 'videosIndex']);
 		Route::get('{slug}', 'PagesController@getVideo');
 	});
 	
