@@ -6,6 +6,9 @@
 			<a href="projects.php" class="button" style="width: 40%; margin-bottom: 1em">Projects</a>
 			<a href="videos.php" class="button" style="width: 40%; margin-bottom: 1em">Videos</a>
 			<a href="javascript:toggleVisibility('contactHide')" class="button" style="width: 40%; margin-bottom: 1em">Contact</a>
+
+			<a href="javascript:toggleVisibility('loginHide')" class="button" style="width: 40%; margin-bottom: 1em">Log In</a>
+			<a href="javascript:toggleVisibility('signUpHide')" class="button" style="width: 83%; margin-bottom: 1em">Sign Up</a>
 		</div>
 
 		<div id="contactHide" style="display: none; ">

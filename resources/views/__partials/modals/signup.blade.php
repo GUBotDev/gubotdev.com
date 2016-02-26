@@ -3,8 +3,8 @@
    <div class="inner"  style="width: 24.75em">
       <form role="form" method="post" action="" autocomplete="off">
          <h2>Sign Up</h2>
-         <input type="text" name="username2" id="username" placeholder="User Name" value="null" tabindex="1" style="margin-bottom: 1em">
-         <input type="email" name="email2" id="email" placeholder="Email Address" value="null" tabindex="2" style="margin-bottom: 1em">
+         <input type="text" name="username2" id="username" placeholder="User Name" tabindex="1" style="margin-bottom: 1em">
+         <input type="email" name="email2" id="email" placeholder="Email Address" tabindex="2" style="margin-bottom: 1em">
          <input type="password" name="password2" id="password" placeholder="Password" tabindex="3" style="margin-bottom: 1em">
          <input type="password" name="passwordConfirm2" id="passwordConfirm" placeholder="Confirm Password" tabindex="4" style="margin-bottom: 1em">
          <p>
